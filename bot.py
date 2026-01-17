@@ -7,8 +7,11 @@ from ta.momentum import RSIIndicator
 from ta.volatility import AverageTrueRange
 
 
-TG_TOKEN = os.getenv("TG_TOKEN")
-TG_CHAT_ID = os.getenv("TG_CHAT_ID")
+#TG_TOKEN = os.getenv("TG_TOKEN")
+#TG_CHAT_ID = os.getenv("TG_CHAT_ID")
+
+TG_TOKEN = "8591772937:AAFzgMJILNWhqWu5cPvgZyBwzX7TDZ5sMqo"
+TG_CHAT_ID = "490648412"
 
 ex = ccxt.binance({"enableRateLimit": True})
 
