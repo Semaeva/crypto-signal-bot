@@ -13,7 +13,7 @@ from ta.volatility import AverageTrueRange
 TG_TOKEN = "8591772937:AAFzgMJILNWhqWu5cPvgZyBwzX7TDZ5sMqo"
 TG_CHAT_ID = "490648412"
 
-ex = ccxt.binance({"enableRateLimit": True})
+ex = ccxt.bybit({"enableRateLimit": True})
 
 def send(msg):
     url = f"https://api.telegram.org/bot{TG_TOKEN}/sendMessage"
