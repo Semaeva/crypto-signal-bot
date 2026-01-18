@@ -14,20 +14,20 @@ TG_TOKEN = "8591772937:AAFzgMJILNWhqWu5cPvgZyBwzX7TDZ5sMqo"
 TG_CHAT_ID = "490648412"
 
 #ex = ccxt.binance({"enableRateLimit": True})
-def fetch_ohlcv(symbol, limit=200):
-    # 15m = 15 минут => берем histominute и aggregate=15
-    base = symbol.split("/")[0]  # BTC из BTC/USDT
-    url = "https://min-api.cryptocompare.com/data/v2/histominute"
-    params = {"fsym": base, "tsym": "USDT", "limit": limit, "aggregate": 15}
-    r = requests.get(url, params=params, timeout=20)
-    r.raise_for_status()
-    data = r.json()["Data"]["Data"]
+# def fetch_ohlcv(symbol, limit=200):
+#     # 15m = 15 минут => берем histominute и aggregate=15
+#     base = symbol.split("/")[0]  # BTC из BTC/USDT
+#     url = "https://min-api.cryptocompare.com/data/v2/histominute"
+#     params = {"fsym": base, "tsym": "USDT", "limit": limit, "aggregate": 15}
+#     r = requests.get(url, params=params, timeout=20)
+#     r.raise_for_status()
+#     data = r.json()["Data"]["Data"]
 
-    ohlcv = []
-    for c in data:
-        ts_ms = int(c["time"]) * 1000
-        ohlcv.append([ts_ms, c["open"], c["high"], c["low"], c["close"], c["volumefrom"]])
-    return ohlcv
+#     ohlcv = []
+#     for c in data:
+#         ts_ms = int(c["time"]) * 1000
+#         ohlcv.append([ts_ms, c["open"], c["high"], c["low"], c["close"], c["volumefrom"]])
+#     return ohlcv
 
 
 def send(msg):
@@ -60,8 +60,8 @@ def run_once():
     state_parts = []
 
     for symbol in SYMBOLS:
-        #ohlcv = ex.fetch_ohlcv(symbol, timeframe=TIMEFRAME, limit=LIMIT)
-        ohlcv = fetch_ohlcv(symbol, limit=LIMIT)
+        ohlcv = ex.fetch_ohlcv(symbol, timeframe=TIMEFRAME, limit=LIMIT)
+        #ohlcv = fetch_ohlcv(symbol, limit=LIMIT)
         df = pd.DataFrame(ohlcv, columns=["ts","open","high","low","close","volume"])
         df["ts"] = pd.to_datetime(df["ts"], unit="ms")
         df["rsi"] = RSIIndicator(df["close"], window=14).rsi()
