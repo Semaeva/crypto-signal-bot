@@ -13,7 +13,7 @@ from ta.volatility import AverageTrueRange
 TG_TOKEN = "8591772937:AAFzgMJILNWhqWu5cPvgZyBwzX7TDZ5sMqo"
 TG_CHAT_ID = "490648412"
 
-#ex = ccxt.binance({"enableRateLimit": True})
+ex = ccxt.binance({"enableRateLimit": True})
 # def fetch_ohlcv(symbol, limit=200):
 #     # 15m = 15 минут => берем histominute и aggregate=15
 #     base = symbol.split("/")[0]  # BTC из BTC/USDT
